@@ -3,56 +3,69 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #9c4300;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0b2433;
+        --foreground: #ededed;
+    }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif;
-  width: 100%;
-  height: 100%;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: 'Times New Roman', Times, serif, Helvetica, sans-serif;
+    width: 100%;
+    height: 100%;
 }
 
 .header {
-  background-color: #f0ad00;
-  width: 100%;
-  height: 90px;
-  align-items: center;
-  padding-left: 20px;
-  padding-top: 20px;
+    background-color: #548683;
+    width: 100%;
+    height: 90px;
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 .timer {
-  background-color: #7b6f83;
-  width: 100px;
-  height: 100px;
-  border-radius: 20px;
-  justify-items: center;
-  padding-top: 20px;
+    background-color: #548683;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    justify-items: center;
+    color: white;
+    transition-duration: 0.4s;
+}
+
+.timer:hover {
+    box-shadow: 0 0 0 0 #ededed, 0 0 10px 0 #ededed;
 }
 
 .die {
-  position: relative;
+    position: relative;
 }
 
+/*
 .hButton {
-  background-color: #7b6f83;
-  border-radius: 5px;
-  width: 100px;
-  height: 50px;
-  margin-left: 10px;
+    background-color: #b3c6c4;
+    border-radius: 5px;
+    width: 100px;
+    height: 50px;
+    margin-left: 10px;
+    transition-duration: 0.4s;
+    color: white;
 }
+
+.hButton:hover {
+    background-color: #2546d1;
+}
+*/
 
 .page {
-  padding-top: 10%;
-  justify-items: center;
+    padding-top: 10%;
+    justify-items: center;
 }

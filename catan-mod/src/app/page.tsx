@@ -2,6 +2,12 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
+interface params {
+    playerCount: number
+    timer: number
+    players: number[]
+}
+
 export default function Home() {
     const [time, setTime] = useState(0)
     const [pause, setPause] = useState(false)
@@ -31,12 +37,19 @@ export default function Home() {
 
     return (
         <body>
-            <div className="header"></div>
-            <div className="page">
-                <button className="timer" onClick={handlePause}>
+            <div className="mainPage">
+                <div className="section">
+                    <h1>rolls</h1>
+                </div>
+                <div className="section">
                     <h1>clock</h1>
-                    <p>{pause ? '❚❚' : time}</p>
-                </button>
+                    <button className="timer" onClick={handlePause}>
+                        <p className="count">{pause ? '❚❚' : time}</p>
+                    </button>
+                </div>
+                <div className="section">
+                    <h1>robber</h1>
+                </div>
             </div>
         </body>
     )

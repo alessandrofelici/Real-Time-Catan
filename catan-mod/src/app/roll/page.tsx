@@ -32,7 +32,7 @@ export default function Roll() {
 
     return (
         <body>
-            <div className="page">
+            <div className="rollPage">
                 <div className="die">
                     <img
                         src="https://i.imgur.com/sxNPtmG.png"

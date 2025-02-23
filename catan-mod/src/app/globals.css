@@ -56,12 +56,7 @@ h1 {
 
 .rollPage {
     justify-items: center;
-    align-items: center;
     margin-top: 15%;
-    list-style-type: none;
-    margin: 0;
-    display: inline-block;
-    -webkit-padding-start: 0;
 }
 
 .mainPage {

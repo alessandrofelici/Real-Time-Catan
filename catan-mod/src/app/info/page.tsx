@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 export default function Home() {
     const [time, setTime] = useState(0)
     const [pause, setPause] = useState(false)
+    const [robber, setRobber] = useState(0)
     // const [history, setHistory] = useState([])
     const router = useRouter()
 
@@ -16,6 +17,7 @@ export default function Home() {
             else if (time == 20) {
                 handleTimer()
                 setTime(0)
+                handleSeven()
             } else setTime(time + 1)
         }, 1000)
 
@@ -28,6 +30,10 @@ export default function Home() {
 
     function handlePause() {
         setPause(!pause)
+    }
+
+    function handleSeven() {
+        setRobber(Math.floor(Math.random() * 3 + 1))
     }
 
     return (
@@ -47,7 +53,7 @@ export default function Home() {
                 </div>
                 <div className="section">
                     <h1>robber</h1>
-                    <p>Player {Math.floor(Math.random() * 3 + 1)}</p>
+                    <p>Player {robber}</p>
                 </div>
             </div>
         </body>

@@ -45,7 +45,7 @@ h1 {
 }
 
 .section {
-    width: 425px;
+    width: 300px;
     height: 600px;
     background-color: #548683;
     border-radius: 15px;
@@ -87,7 +87,7 @@ h1 {
 
 .timer {
     background-color: #f1d089;
-    width: 380px;
+    width: 255px;
     height: 450px;
     border-radius: 20px;
     justify-items: center;

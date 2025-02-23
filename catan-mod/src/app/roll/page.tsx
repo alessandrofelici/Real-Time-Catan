@@ -33,14 +33,16 @@ export default function Roll() {
     return (
         <body>
             <div className="rollPage">
-                <div className="die">
-                    <img
-                        src="https://i.imgur.com/sxNPtmG.png"
-                        width="200px"
-                        height="200px"
-                    />
+                <div className="bigSection">
+                    <div className="die">
+                        <img
+                            src="https://i.imgur.com/sxNPtmG.png"
+                            width="200px"
+                            height="200px"
+                        />
+                    </div>
+                    <h1>{roll ? 'rolling...' : value}</h1>4
                 </div>
-                <h1>{roll ? 'rolling...' : value}</h1>
             </div>
         </body>
     )

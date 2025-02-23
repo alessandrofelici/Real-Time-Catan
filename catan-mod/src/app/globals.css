@@ -55,6 +55,7 @@ h1 {
 }
 
 .rollPage {
+    justify-content: space-evenly;
     justify-items: center;
     margin-top: 15%;
 }

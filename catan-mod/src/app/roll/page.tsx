@@ -41,7 +41,7 @@ export default function Roll() {
                             height="200px"
                         />
                     </div>
-                    <h1>{roll ? 'rolling...' : value}</h1>4
+                    <h1>{roll ? 'rolling...' : value}</h1>
                 </div>
             </div>
         </body>

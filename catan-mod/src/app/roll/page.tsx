@@ -15,7 +15,7 @@ export default function Roll() {
                 handleRoll()
             }
             if (time == 10) {
-                router.push('/')
+                router.push('/info')
             }
             setTime(time + 1)
         }, 1000)
@@ -24,10 +24,10 @@ export default function Roll() {
     })
 
     function handleRoll() {
-        setValue(
+        const dice =
             Math.floor(Math.random() * 6 + 1) +
-                Math.floor(Math.random() * 6 + 1)
-        )
+            Math.floor(Math.random() * 6 + 1)
+        setValue(dice)
     }
 
     return (

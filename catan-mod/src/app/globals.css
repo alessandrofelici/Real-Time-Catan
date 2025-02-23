@@ -32,6 +32,10 @@ body {
     padding-top: 20px;
 }
 
+.form {
+    color: black;
+}
+
 p {
     font-size: 30px;
 }
@@ -62,6 +66,25 @@ h1 {
     justify-content: space-evenly;
 }
 
+.inputPage {
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+    justify-items: center;
+}
+
+.formBox {
+    width: 400px;
+    height: 350px;
+    background-color: #b3c6c4;
+    border-radius: 15px;
+    color: black;
+    font-size: larger;
+    font-weight: 600;
+    justify-items: center;
+    padding-top: 50px;
+}
+
 .timer {
     background-color: #f1d089;
     width: 380px;
@@ -70,6 +93,15 @@ h1 {
     justify-items: center;
     color: white;
     transition-duration: 0.4s;
+}
+
+.startButton {
+    background-color: white;
+    color: black;
+    width: 60px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 /*

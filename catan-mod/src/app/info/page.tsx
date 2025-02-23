@@ -35,6 +35,9 @@ export default function Home() {
             <div className="mainPage">
                 <div className="section">
                     <h1>rolls</h1>
+                    <ol>
+                        <li>evil</li>
+                    </ol>
                 </div>
                 <div className="section">
                     <h1>clock</h1>
@@ -44,6 +47,7 @@ export default function Home() {
                 </div>
                 <div className="section">
                     <h1>robber</h1>
+                    <p>Player {Math.floor(Math.random() * 3 + 1)}</p>
                 </div>
             </div>
         </body>

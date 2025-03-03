@@ -1,10 +1,8 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Options() {
-    const router = useRouter()
     const [timer, setTimer] = useState('')
     const [count, setCount] = useState('')
 

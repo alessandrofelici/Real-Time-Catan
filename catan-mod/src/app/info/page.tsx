@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
@@ -59,32 +59,34 @@ export default function Home() {
     })
 
     return (
-        <div className="mainPage">
-            <div className="section">
-                <h1>rolls</h1>
-                <div className="die">
-                    <img
-                        src="https://i.imgur.com/sxNPtmG.png"
-                        width="200px"
-                        height="200px"
-                    />
+        <Suspense>
+            <div className="mainPage">
+                <div className="section">
+                    <h1>rolls</h1>
+                    <div className="die">
+                        <img
+                            src="https://i.imgur.com/sxNPtmG.png"
+                            width="200px"
+                            height="200px"
+                        />
+                    </div>
+                    <p>Most Recent: {value}</p>
+                    <br></br>
+                    <p>Previous Rolls:</p>
+                    <ul>{rolls}</ul>
                 </div>
-                <p>Most Recent: {value}</p>
-                <br></br>
-                <p>Previous Rolls:</p>
-                <ul>{rolls}</ul>
+                <div className="section">
+                    <h1>clock</h1>
+                    <button className="timer" onClick={handlePause}>
+                        <p className="count">{pause ? '❚❚' : time}</p>
+                    </button>
+                </div>
+                <div className="section">
+                    <h1>robber</h1>
+                    <p>Player {robber}</p>
+                    <ol>{robbers}</ol>
+                </div>
             </div>
-            <div className="section">
-                <h1>clock</h1>
-                <button className="timer" onClick={handlePause}>
-                    <p className="count">{pause ? '❚❚' : time}</p>
-                </button>
-            </div>
-            <div className="section">
-                <h1>robber</h1>
-                <p>Player {robber}</p>
-                <ol>{robbers}</ol>
-            </div>
-        </div>
+        </Suspense>
     )
 }

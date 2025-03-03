@@ -11,6 +11,7 @@ export default function Home() {
     const [robber, setRobber] = useState(0)
     const [value, setValue] = useState(0)
     const [history, setHistory] = useState(Array(5).fill(null))
+    const [histRobber, setHistRobber] = useState(Array(5).fill(null))
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -31,6 +32,8 @@ export default function Home() {
     }
 
     function handleSeven() {
+        const nextRobberHistory = [...histRobber.slice(1, 6), robber]
+        setHistRobber(nextRobberHistory)
         setRobber(Math.floor(Math.random() * players + 1))
     }
 
@@ -47,11 +50,12 @@ export default function Home() {
 
     const historyReversed = history.toReversed()
     const rolls = historyReversed.map((history, roll) => {
-        return (
-            <>
-                <li key={roll}>{history}</li>
-            </>
-        )
+        return <li key={roll}>{history}</li>
+    })
+
+    const histRobberReversed = histRobber.toReversed()
+    const robbers = histRobberReversed.map((history, robber) => {
+        if (history != null) return <li key={robber}>Player {history}</li>
     })
 
     return (
@@ -79,12 +83,8 @@ export default function Home() {
             <div className="section">
                 <h1>robber</h1>
                 <p>Player {robber}</p>
+                <ol>{robbers}</ol>
             </div>
         </div>
     )
 }
-
-// TODO
-// ID issue
-// include timestamp at rolls?
-// robber history

@@ -1,8 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
-export default function Home() {
+export default function Home({ searchParams }) {
+    const maxTime = searchParams.timer_num
+    const players = searchParams.count_num
     const [time, setTime] = useState(0)
     const [pause, setPause] = useState(false)
     const [robber, setRobber] = useState(0)
@@ -14,7 +17,7 @@ export default function Home() {
     useEffect(() => {
         const intervalId = setInterval(() => {
             if (pause) setTime(time)
-            else if (time == 20) {
+            else if (time == maxTime) {
                 handleTimer()
                 setTime(0)
                 handleSeven()

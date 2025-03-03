@@ -32,26 +32,12 @@ body {
     padding-top: 20px;
 }
 
-.form {
-    color: black;
-}
-
 p {
     font-size: 30px;
 }
 
 h1 {
     font-size: 65px;
-}
-
-.section {
-    width: 300px;
-    height: 600px;
-    background-color: #548683;
-    border-radius: 15px;
-    margin-top: 50px;
-    padding-left: 20px;
-    padding-top: 20px;
 }
 
 .rollPage {
@@ -75,7 +61,7 @@ h1 {
 
 .formBox {
     width: 400px;
-    height: 350px;
+    height: 400px;
     background-color: #b3c6c4;
     border-radius: 15px;
     color: black;
@@ -83,6 +69,22 @@ h1 {
     font-weight: 600;
     justify-items: center;
     padding-top: 50px;
+}
+
+.textArea {
+    width: 300px;
+    height: 30px;
+    resize: none;
+}
+
+.section {
+    width: 300px;
+    height: 600px;
+    background-color: #548683;
+    border-radius: 15px;
+    margin-top: 50px;
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 .timer {
@@ -104,28 +106,6 @@ h1 {
     font-size: 14px;
 }
 
-/*
-.timer:hover {
-    box-shadow: 0 0 0 0 #ededed, 0 0 10px 0 #ededed;
-}
-*/
-
 .die {
     position: relative;
 }
-
-/*
-.hButton {
-    background-color: #b3c6c4;
-    border-radius: 5px;
-    width: 100px;
-    height: 50px;
-    margin-left: 10px;
-    transition-duration: 0.4s;
-    color: white;
-}
-
-.hButton:hover {
-    background-color: #2546d1;
-}
-*/

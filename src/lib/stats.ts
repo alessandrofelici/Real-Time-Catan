@@ -9,11 +9,14 @@ function getFrequency(data: number[]): Record<number, number> {
     return freq
 }
 
-export const statRegistry = {
-    count: {
-        label: 'Count',
+export function count(label: string): Stat {
+    return {
+        label,
         compute: (data) => data.length.toString(),
-    },
+    }
+}
+
+export const statRegistry = {
     mostOccurring: {
         label: 'Most Occurring',
         compute: (data) => {
@@ -38,14 +41,23 @@ export const statRegistry = {
                 .join(', ')
         },
     },
-} satisfies Record<string, Stat>
-
-export function recent(count: number): Stat {
-    return {
-        label: `Last ${count}`,
+    mostOccurringCount: {
+        label: 'Most Occurring Count',
         compute: (data) => {
             if (data.length === 0) return '-'
-            return data.slice(-count).toReversed().join(', ')
+            const freq = getFrequency(data)
+            return Math.max(...Object.values(freq)).toString()
+        },
+    },
+} satisfies Record<string, Stat>
+
+export function recent(count: number, label: string, format?: (value: number) => string): Stat {
+    return {
+        label,
+        compute: (data) => {
+            if (data.length === 0) return '-'
+            const items = data.slice(-count).toReversed()
+            return format ? items.map(format).join(', ') : items.join(', ')
         },
     }
 }

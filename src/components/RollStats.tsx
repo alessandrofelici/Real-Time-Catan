@@ -1,6 +1,6 @@
 import StatDisplay from '@/components/StatDisplay'
 import DiceFaces from '@/components/DiceFaces'
-import { recent } from '@/lib/stats'
+import { count, recent } from '@/lib/stats'
 
 type RollStatsProps = {
     value: number
@@ -17,7 +17,7 @@ export default function RollStats({ value, dice, allRolls }: RollStatsProps) {
             <br />
             <StatDisplay
                 data={allRolls}
-                statKeys={['count', 'mostOccurring', 'leastOccurring', recent(3)]}
+                statKeys={[count('Round'), 'mostOccurring', 'leastOccurring', recent(3, 'Last Rolls')]}
             />
         </div>
     )

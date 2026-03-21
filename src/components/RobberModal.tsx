@@ -54,7 +54,7 @@ export default function RobberModal({ players, selected, onComplete }: RobberMod
             zIndex: 100,
         }}>
             <div style={{
-                backgroundColor: '#548683',
+                backgroundColor: '#2B2D42',
                 borderRadius: 15,
                 padding: 40,
                 display: 'flex',
@@ -90,7 +90,7 @@ export default function RobberModal({ players, selected, onComplete }: RobberMod
                         left: '50%',
                         width: 3,
                         height: 28,
-                        backgroundColor: '#f1d089',
+                        backgroundColor: '#FA7921',
                         transform: 'translateX(-50%)',
                     }} />
                 </div>

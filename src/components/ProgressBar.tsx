@@ -10,7 +10,7 @@ export default function ProgressBar({
     progress,
     width = 255,
     height = 20,
-    color = '#f1d089',
+    color = '#FA7921',
     backgroundColor = 'rgba(255, 255, 255, 0.2)',
 }: ProgressBarProps) {
     const clamped = Math.min(Math.max(progress, 0), 1)

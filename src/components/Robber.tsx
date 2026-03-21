@@ -1,5 +1,5 @@
 import StatDisplay from '@/components/StatDisplay'
-import { recent } from '@/lib/stats'
+import { count, recent } from '@/lib/stats'
 
 type RobberProps = {
     robber: number
@@ -14,7 +14,7 @@ export default function Robber({ robber, allRobbers }: RobberProps) {
             <br />
             <StatDisplay
                 data={allRobbers}
-                statKeys={['count', 'mostOccurring', recent(1)]}
+                statKeys={[count('Times Rolled'), 'mostOccurring', 'mostOccurringCount', recent(1, 'Last Robber', (v) => `Player ${v}`)]}
             />
         </div>
     )

@@ -27,7 +27,7 @@ export default function Options() {
                 <br></br>
                 <Link
                     href={{
-                        pathname: '/info',
+                        pathname: '/game',
                         query: {
                             timer_num: parseInt(timer),
                             count_num: parseInt(count),

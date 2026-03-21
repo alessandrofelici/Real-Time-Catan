@@ -5,16 +5,21 @@ import RollStats from '@/components/RollStats'
 import Clock from '@/components/Clock'
 import Robber from '@/components/Robber'
 
+import { GameOptions } from '@/lib/gameOptions'
+import { getSpeedupTime } from '@/lib/speedup'
+
 type GameClientProps = {
     maxTime: number
     players: number
+    options: GameOptions
 }
 
-export default function GameClient({ maxTime, players }: GameClientProps) {
+export default function GameClient({ maxTime, players, options }: GameClientProps) {
     const [time, setTime] = useState(0)
-    const [pause, setPause] = useState(false)
+    const [pause, setPause] = useState(true)
     const [robber, setRobber] = useState(0)
     const [value, setValue] = useState(0)
+    const [round, setRound] = useState(0)
     const [allRolls, setAllRolls] = useState<number[]>([])
     const [allRobbers, setAllRobbers] = useState<number[]>([])
     const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -35,26 +40,32 @@ export default function GameClient({ maxTime, players }: GameClientProps) {
             Math.floor(Math.random() * 6) + 1
         setValue(dice)
         setAllRolls((prev) => [...prev, dice])
-        if (audioRef.current) {
+        setRound((prev) => prev + 1)
+        if (options.sound && audioRef.current) {
             audioRef.current.currentTime = 0
-            audioRef.current.play()
+            audioRef.current.play().catch(() => {})
         }
-    }, [])
+    }, [options.sound])
+
+    const currentMaxTime = options.speedupStart
+        ? getSpeedupTime(round + 1, maxTime)
+        : maxTime
 
     useEffect(() => {
         const intervalId = setInterval(() => {
             if (!pause) {
-                if (time === maxTime) {
+                const maxTenths = currentMaxTime * 10
+                if (time >= maxTenths) {
                     setTime(0)
                     handleRoll()
                 } else {
                     setTime(time + 1)
                 }
             }
-        }, 1000)
+        }, 100)
 
         return () => clearInterval(intervalId)
-    }, [pause, time, maxTime, handleRoll])
+    }, [pause, time, currentMaxTime, handleRoll])
 
     useEffect(() => {
         if (value === 7) handleSeven()

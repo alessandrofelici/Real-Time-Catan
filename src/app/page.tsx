@@ -1,11 +1,15 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { defaultGameOptions } from '@/lib/gameOptions'
+import OptionSwitch from '@/components/OptionSwitch'
 
 export default function Options() {
     const router = useRouter()
     const [timer, setTimer] = useState('')
     const [count, setCount] = useState('')
+    const [sound, setSound] = useState(defaultGameOptions.sound)
+    const [speedupStart, setSpeedupStart] = useState(defaultGameOptions.speedupStart)
 
     function handleStart() {
         const timerNum = parseInt(timer)
@@ -20,7 +24,14 @@ export default function Options() {
             return
         }
 
-        router.push(`/game?timer_num=${timerNum}&count_num=${countNum}`)
+        const params = new URLSearchParams({
+            timer_num: timerNum.toString(),
+            count_num: countNum.toString(),
+            sound: sound.toString(),
+            speedup_start: speedupStart.toString(),
+        })
+
+        router.push(`/game?${params.toString()}`)
     }
 
     return (
@@ -31,7 +42,7 @@ export default function Options() {
                     className="textArea"
                     type="number"
                     min={1}
-                    max={99}
+                    max={120}
                     placeholder="Enter a number in seconds"
                     onChange={(e) => setTimer(e.target.value)}
                 />
@@ -45,6 +56,8 @@ export default function Options() {
                     onChange={(e) => setCount(e.target.value)}
                 />
                 <br />
+                <OptionSwitch label="Sound" checked={sound} onChange={setSound} />
+                <OptionSwitch label="Speedup Start" checked={speedupStart} onChange={setSpeedupStart} />
                 <br />
                 <button onClick={handleStart}>
                     Start

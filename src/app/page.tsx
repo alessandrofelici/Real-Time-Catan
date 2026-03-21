@@ -10,6 +10,7 @@ export default function Options() {
     const [count, setCount] = useState('')
     const [sound, setSound] = useState(defaultGameOptions.sound)
     const [speedupStart, setSpeedupStart] = useState(defaultGameOptions.speedupStart)
+    const [robberAnimation, setRobberAnimation] = useState(defaultGameOptions.robberAnimation)
 
     function handleStart() {
         const timerNum = parseInt(timer)
@@ -29,6 +30,7 @@ export default function Options() {
             count_num: countNum.toString(),
             sound: sound.toString(),
             speedup_start: speedupStart.toString(),
+            robber_animation: robberAnimation.toString(),
         })
 
         router.push(`/game?${params.toString()}`)
@@ -58,6 +60,7 @@ export default function Options() {
                 <br />
                 <OptionSwitch label="Sound" checked={sound} onChange={setSound} />
                 <OptionSwitch label="Speedup Start" checked={speedupStart} onChange={setSpeedupStart} />
+                <OptionSwitch label="Show Robber Animation" checked={robberAnimation} onChange={setRobberAnimation} />
                 <br />
                 <button onClick={handleStart}>
                     Start

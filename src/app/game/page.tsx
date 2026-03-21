@@ -7,6 +7,7 @@ type GamePageProps = {
         count_num?: string
         sound?: string
         speedup_start?: string
+        robber_animation?: string
     }>
 }
 
@@ -17,6 +18,7 @@ export default async function GamePage({ searchParams }: GamePageProps) {
     const options = {
         sound: params.sound === undefined ? defaultGameOptions.sound : params.sound === 'true',
         speedupStart: params.speedup_start === undefined ? defaultGameOptions.speedupStart : params.speedup_start === 'true',
+        robberAnimation: params.robber_animation === undefined ? defaultGameOptions.robberAnimation : params.robber_animation === 'true',
     }
 
     return <GameClient maxTime={maxTime} players={players} options={options} />

@@ -4,6 +4,7 @@ import MenuButton from '@/components/MenuButton'
 import RollStats from '@/components/RollStats'
 import Clock from '@/components/Clock'
 import Robber from '@/components/Robber'
+import RobberModal from '@/components/RobberModal'
 
 import { GameOptions } from '@/lib/gameOptions'
 import { getSpeedupTime } from '@/lib/speedup'
@@ -22,6 +23,8 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
     const [round, setRound] = useState(0)
     const [allRolls, setAllRolls] = useState<number[]>([])
     const [allRobbers, setAllRobbers] = useState<number[]>([])
+    const [showRobberModal, setShowRobberModal] = useState(false)
+    const [pendingRobber, setPendingRobber] = useState(0)
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
     useEffect(() => {
@@ -30,9 +33,22 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
 
     const handleSeven = useCallback(() => {
         const newRobber = Math.floor(Math.random() * players) + 1
-        setRobber(newRobber)
-        setAllRobbers((prev) => [...prev, newRobber])
-    }, [players])
+        if (options.robberAnimation) {
+            setPendingRobber(newRobber)
+            setShowRobberModal(true)
+            setPause(true)
+        } else {
+            setRobber(newRobber)
+            setAllRobbers((prev) => [...prev, newRobber])
+        }
+    }, [players, options.robberAnimation])
+
+    function handleRobberModalComplete() {
+        setRobber(pendingRobber)
+        setAllRobbers((prev) => [...prev, pendingRobber])
+        setShowRobberModal(false)
+        setPause(false)
+    }
 
     const handleRoll = useCallback(() => {
         const dice =
@@ -78,6 +94,13 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
     return (
         <div>
             <MenuButton />
+            {showRobberModal && (
+                <RobberModal
+                    players={players}
+                    selected={pendingRobber}
+                    onComplete={handleRobberModalComplete}
+                />
+            )}
             <div className="mainPage">
                 <RollStats value={value} allRolls={allRolls} />
                 <Clock time={time} pause={pause} onPause={handlePause} />

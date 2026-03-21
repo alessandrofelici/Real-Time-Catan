@@ -26,14 +26,20 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
     const [allRobbers, setAllRobbers] = useState<number[]>([])
     const [showRobberModal, setShowRobberModal] = useState(false)
     const [pendingRobber, setPendingRobber] = useState(0)
-    const audioRef = useRef<HTMLAudioElement | null>(null)
+    const rollAudioRef = useRef<HTMLAudioElement | null>(null)
+    const robberAudioRef = useRef<HTMLAudioElement | null>(null)
 
     useEffect(() => {
-        audioRef.current = new Audio('/sounds/roll.wav')
+        rollAudioRef.current = new Audio('/sounds/roll.wav')
+        robberAudioRef.current = new Audio('/sounds/robber.wav')
     }, [])
 
     const handleSeven = useCallback(() => {
         const newRobber = Math.floor(Math.random() * players) + 1
+        if (options.sound && robberAudioRef.current) {
+            robberAudioRef.current.currentTime = 0
+            robberAudioRef.current.play().catch(() => {})
+        }
         if (options.robberAnimation) {
             setPendingRobber(newRobber)
             setShowRobberModal(true)
@@ -54,13 +60,14 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
     const handleRoll = useCallback(() => {
         const die1 = Math.floor(Math.random() * 6) + 1
         const die2 = Math.floor(Math.random() * 6) + 1
+        const total = die1 + die2
         setDice([die1, die2])
-        setValue(die1 + die2)
-        setAllRolls((prev) => [...prev, die1 + die2])
+        setValue(total)
+        setAllRolls((prev) => [...prev, total])
         setRound((prev) => prev + 1)
-        if (options.sound && audioRef.current) {
-            audioRef.current.currentTime = 0
-            audioRef.current.play().catch(() => {})
+        if (options.sound && total !== 7 && rollAudioRef.current) {
+            rollAudioRef.current.currentTime = 0
+            rollAudioRef.current.play().catch(() => {})
         }
     }, [options.sound])
 

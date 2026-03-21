@@ -1,8 +1,8 @@
-import { getStats, StatKey } from '@/lib/stats'
+import { getStats, StatEntry } from '@/lib/stats'
 
 type StatDisplayProps = {
     data: number[]
-    statKeys: StatKey[]
+    statKeys: StatEntry[]
 }
 
 export default function StatDisplay({ data, statKeys }: StatDisplayProps) {

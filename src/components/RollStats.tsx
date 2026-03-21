@@ -1,4 +1,5 @@
 import StatDisplay from '@/components/StatDisplay'
+import { recent } from '@/lib/stats'
 
 type RollStatsProps = {
     value: number
@@ -13,7 +14,7 @@ export default function RollStats({ value, allRolls }: RollStatsProps) {
             <br />
             <StatDisplay
                 data={allRolls}
-                statKeys={['count', 'mostOccurring', 'leastOccurring']}
+                statKeys={['count', 'mostOccurring', 'leastOccurring', recent(3)]}
             />
         </div>
     )

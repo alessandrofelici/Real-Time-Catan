@@ -40,8 +40,20 @@ export const statRegistry = {
     },
 } satisfies Record<string, Stat>
 
+export function recent(count: number): Stat {
+    return {
+        label: `Last ${count}`,
+        compute: (data) => {
+            if (data.length === 0) return '-'
+            return data.slice(-count).toReversed().join(', ')
+        },
+    }
+}
+
 export type StatKey = keyof typeof statRegistry
 
-export function getStats(keys: StatKey[]): Stat[] {
-    return keys.map((key) => statRegistry[key])
+export type StatEntry = StatKey | Stat
+
+export function getStats(keys: StatEntry[]): Stat[] {
+    return keys.map((key) => typeof key === 'string' ? statRegistry[key] : key)
 }

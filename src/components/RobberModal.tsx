@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect } from 'react'
-import ProgressBar from '@/components/ProgressBar'
 
 type RobberModalProps = {
     players: number
@@ -39,42 +38,17 @@ export default function RobberModal({ players, selected, onComplete }: RobberMod
     const totalDuration = ROLLING_DURATION + SELECTED_DURATION
     const progress = Math.min(elapsed / totalDuration, 1)
     const playerNumbers = Array.from({ length: players }, (_, i) => i + 1)
+    const barWidth = playerNumbers.length * 110
 
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.6)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 100,
-        }}>
-            <div style={{
-                backgroundColor: '#2B2D42',
-                borderRadius: 15,
-                padding: 40,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 20,
-            }}>
-                <div style={{ display: 'flex', gap: 30 }}>
+        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+            <div className="bg-on-surface rounded-[2rem] p-8 flex flex-col items-center gap-6 shadow-2xl">
+                <div className="flex gap-6">
                     {playerNumbers.map((num) => (
                         <div
                             key={num}
+                            className="text-4xl font-black text-white w-16 h-16 flex justify-center items-center font-headline"
                             style={{
-                                fontSize: 48,
-                                fontWeight: 'bold',
-                                color: 'white',
-                                width: 80,
-                                height: 80,
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
                                 visibility: phase === 'selected' && num !== selected ? 'hidden' : 'visible',
                             }}
                         >
@@ -82,17 +56,20 @@ export default function RobberModal({ players, selected, onComplete }: RobberMod
                         </div>
                     ))}
                 </div>
-                <div style={{ position: 'relative', width: playerNumbers.length * 110 }}>
-                    <ProgressBar progress={progress} width={playerNumbers.length * 110} color="white" />
-                    <div style={{
-                        position: 'absolute',
-                        top: -4,
-                        left: '50%',
-                        width: 3,
-                        height: 28,
-                        backgroundColor: '#FA7921',
-                        transform: 'translateX(-50%)',
-                    }} />
+                <div className="relative" style={{ width: barWidth }}>
+                    <div className="w-full h-4 bg-white/10 rounded-full overflow-hidden">
+                        <div
+                            className="h-full bg-white rounded-full"
+                            style={{
+                                width: `${progress * 100}%`,
+                                transition: 'width 0.1s linear',
+                            }}
+                        />
+                    </div>
+                    <div
+                        className="absolute top-[-4px] w-[3px] h-7 bg-primary-container"
+                        style={{ left: '50%', transform: 'translateX(-50%)' }}
+                    />
                 </div>
             </div>
         </div>

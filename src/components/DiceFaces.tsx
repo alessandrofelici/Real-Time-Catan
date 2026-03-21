@@ -10,7 +10,7 @@ export default function DiceFaces({ dice }: DiceFacesProps) {
     if (die1 === 0 || die2 === 0) return null
 
     return (
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div className="flex gap-6">
             <img
                 src={`/images/dice-six-faces-${FACE_NAMES[die1]}.png`}
                 width="80"

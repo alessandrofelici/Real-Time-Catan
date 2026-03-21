@@ -26,7 +26,7 @@ export default function OptionSwitch({ label, checked, onChange }: OptionSwitchP
                     height: 28,
                     borderRadius: 14,
                     border: 'none',
-                    backgroundColor: checked ? 'var(--accent-green)' : '#ccc',
+                    backgroundColor: checked ? '#ac2c00' : '#ccc',
                     position: 'relative',
                     cursor: 'pointer',
                     transition: 'background-color 0.2s',

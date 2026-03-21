@@ -4,7 +4,7 @@
 
 :root {
     --background: #ffffff;
-    --foreground: #171717;
+    --foreground: #2c2f30;
     --accent-cream: #EEE2DF;
     --accent-orange: #FA7921;
     --accent-red: #BB0A21;
@@ -22,84 +22,64 @@
 body {
     color: var(--foreground);
     background: var(--background);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    width: 100%;
-    height: 100%;
+    font-family: var(--font-body), 'Manrope', sans-serif;
 }
 
-.section p {
-    font-size: 30px;
-}
-
-.section h1 {
-    font-size: 65px;
-}
-
-.formBox p {
-    font-size: 30px;
-}
-
-.mainPage {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-}
+/*
+ * Section Heading Reference (ROLLS, CLOCK, ROBBER):
+ *   Accent bar: w-1.5 h-8 rounded-full
+ *   Container:  flex items-center gap-3
+ *   Heading:    text-3xl font-black tracking-tighter uppercase font-headline
+ */
 
 .inputPage {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #ffffff;
 }
 
 .formBox {
     width: 600px;
-    background-color: var(--accent-cream);
-    border-radius: 15px;
-    color: black;
-    font-size: larger;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    color: #2c2f30;
+    font-family: var(--font-body), 'Manrope', sans-serif;
     font-weight: 600;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 50px 40px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.formBox p {
+    font-family: var(--font-headline), 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    color: #2c2f30;
 }
 
 .textArea {
     width: 100%;
     max-width: 400px;
-    height: 36px;
+    height: 40px;
     resize: none;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    padding: 0 10px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    padding: 0 12px;
     font-size: 16px;
+    font-family: var(--font-body), 'Manrope', sans-serif;
+    transition: border-color 0.2s;
 }
 
-.section {
-    width: 300px;
-    height: 600px;
-    background-color: var(--accent-navy);
-    border-radius: 15px;
-    margin-top: 50px;
-    padding-left: 20px;
-    padding-top: 20px;
-    color: white;
-}
-
-.timer {
-    background-color: var(--accent-orange);
-    width: 255px;
-    height: 450px;
-    border-radius: 20px;
-    justify-items: center;
-    color: white;
-    transition-duration: 0.4s;
-}
-
-.die {
-    position: relative;
+.textArea:focus {
+    outline: none;
+    border-color: #ac2c00;
 }

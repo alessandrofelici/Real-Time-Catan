@@ -62,7 +62,24 @@ export default function Options() {
                 <OptionSwitch label="Speedup Start" checked={speedupStart} onChange={setSpeedupStart} />
                 <OptionSwitch label="Show Robber Animation" checked={robberAnimation} onChange={setRobberAnimation} />
                 <br />
-                <button onClick={handleStart}>
+                <button
+                    onClick={handleStart}
+                    style={{
+                        width: '100%',
+                        maxWidth: 400,
+                        padding: '12px 0',
+                        backgroundColor: '#ac2c00',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: 10,
+                        fontSize: 18,
+                        fontWeight: 800,
+                        fontFamily: 'var(--font-headline), sans-serif',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        cursor: 'pointer',
+                    }}
+                >
                     Start
                 </button>
             </div>

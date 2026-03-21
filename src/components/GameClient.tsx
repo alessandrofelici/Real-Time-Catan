@@ -48,7 +48,7 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
             setRobber(newRobber)
             setAllRobbers((prev) => [...prev, newRobber])
         }
-    }, [players, options.robberAnimation])
+    }, [players, options.robberAnimation, options.sound])
 
     function handleRobberModalComplete() {
         setRobber(pendingRobber)
@@ -100,7 +100,7 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
     }
 
     return (
-        <div>
+        <div className="min-h-screen bg-white">
             <MenuButton />
             {showRobberModal && (
                 <RobberModal
@@ -109,11 +109,13 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
                     onComplete={handleRobberModalComplete}
                 />
             )}
-            <div className="mainPage">
-                <RollStats value={value} dice={dice} allRolls={allRolls} />
-                <Clock time={time} maxTenths={currentMaxTime * 10} pause={pause} onPause={handlePause} />
-                <Robber robber={robber} allRobbers={allRobbers} />
-            </div>
+            <main className="max-w-[1200px] mx-auto px-8 pt-16 pb-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+                    <RollStats value={value} dice={dice} allRolls={allRolls} />
+                    <Clock time={time} maxTenths={currentMaxTime * 10} pause={pause} onPause={handlePause} />
+                    <Robber robber={robber} allRobbers={allRobbers} />
+                </div>
+            </main>
         </div>
     )
 }

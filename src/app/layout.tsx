@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Real Time Catan",
-  description: "White Monster",
+  description: "Alternative Catan game mode for chaotic play styles",
 };
 
 export default function RootLayout({

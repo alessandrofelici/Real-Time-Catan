@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
 
 export default function Home() {
@@ -13,64 +13,57 @@ export default function Home() {
     const [history, setHistory] = useState(Array(5).fill(null))
     const [histRobber, setHistRobber] = useState(Array(5).fill(null))
 
+    const handleSeven = useCallback(() => {
+        setHistRobber((prev) => [...prev.slice(1, 6), robber])
+        setRobber(Math.floor(Math.random() * players) + 1)
+    }, [robber, players])
+
+    const handleRoll = useCallback(() => {
+        if (value !== 0) {
+            setHistory((prev) => [...prev.slice(1, 6), value])
+        }
+        const dice =
+            Math.floor(Math.random() * 6) + 1 +
+            Math.floor(Math.random() * 6) + 1
+        setValue(dice)
+    }, [value])
+
     useEffect(() => {
         const intervalId = setInterval(() => {
             if (!pause) {
-                if (time == maxTime) {
+                if (time === maxTime) {
                     setTime(0)
-                    if (value == 7) handleSeven()
+                    if (value === 7) handleSeven()
                     handleRoll()
-                } else setTime(time + 1)
+                } else {
+                    setTime(time + 1)
+                }
             }
         }, 1000)
 
         return () => clearInterval(intervalId)
-    })
+    }, [pause, time, maxTime, value, handleSeven, handleRoll])
 
     function handlePause() {
         setPause(!pause)
     }
 
-    function handleSeven() {
-        const nextRobberHistory = [...histRobber.slice(1, 6), robber]
-        setHistRobber(nextRobberHistory)
-        setRobber(Math.floor(Math.random() * players + 1))
-    }
-
-    function handleRoll() {
-        if (value != 0) {
-            const nextHistory = [...history.slice(1, 6), value]
-            setHistory(nextHistory)
-        }
-        const dice =
-            Math.floor(Math.random() * 6 + 1) +
-            Math.floor(Math.random() * 6 + 1)
-        setValue(dice)
-    }
-
     const historyReversed = history.toReversed()
-    const rolls = historyReversed.map((history, roll) => {
-        return <li key={roll}>{history}</li>
+    const rolls = historyReversed.map((entry, index) => {
+        return <li key={index}>{entry}</li>
     })
 
     const histRobberReversed = histRobber.toReversed()
-    const robbers = histRobberReversed.map((history, robber) => {
-        if (history != null) return <li key={robber}>Player {history}</li>
+    const robbers = histRobberReversed.map((entry, index) => {
+        if (entry !== null) return <li key={index}>Player {entry}</li>
     })
 
     return (
         <div className="mainPage">
             <div className="section">
                 <h1>rolls</h1>
-                <div className="die">
-                    <img
-                        src="https://i.imgur.com/sxNPtmG.png"
-                        width="200px"
-                        height="200px"
-                    />
-                </div>
                 <p>Most Recent: {value}</p>
-                <br></br>
+                <br />
                 <p>Previous Rolls:</p>
                 <ul>{rolls}</ul>
             </div>

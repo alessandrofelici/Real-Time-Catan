@@ -1,41 +1,54 @@
 'use client'
 import { useState } from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function Options() {
+    const router = useRouter()
     const [timer, setTimer] = useState('')
     const [count, setCount] = useState('')
+
+    function handleStart() {
+        const timerNum = parseInt(timer)
+        const countNum = parseInt(count)
+
+        if (isNaN(timerNum) || timerNum < 1 || timerNum > 99) {
+            alert('Enter a valid timer (1-99)')
+            return
+        }
+        if (isNaN(countNum) || countNum < 3 || countNum > 6) {
+            alert('Enter a valid player count (3-6)')
+            return
+        }
+
+        router.push(`/game?timer_num=${timerNum}&count_num=${countNum}`)
+    }
 
     return (
         <div className="inputPage">
             <div className="formBox">
                 <p>Roll Timer</p>
-                <textarea
+                <input
                     className="textArea"
-                    maxLength={2}
+                    type="number"
+                    min={1}
+                    max={99}
                     placeholder="Enter a number in seconds"
                     onChange={(e) => setTimer(e.target.value)}
-                ></textarea>
+                />
                 <p>Player Count</p>
-                <textarea
+                <input
                     className="textArea"
-                    maxLength={1}
+                    type="number"
+                    min={3}
+                    max={6}
                     placeholder="Enter a number 3-6"
                     onChange={(e) => setCount(e.target.value)}
-                ></textarea>
-                <br></br>
-                <br></br>
-                <Link
-                    href={{
-                        pathname: '/game',
-                        query: {
-                            timer_num: parseInt(timer),
-                            count_num: parseInt(count),
-                        },
-                    }}
-                >
+                />
+                <br />
+                <br />
+                <button onClick={handleStart}>
                     Start
-                </Link>
+                </button>
             </div>
         </div>
     )

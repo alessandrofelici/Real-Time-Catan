@@ -1,13 +1,15 @@
 'use client'
 import { useState } from 'react'
+import ProgressBar from '@/components/ProgressBar'
 
 type ClockProps = {
     time: number
+    maxTenths: number
     pause: boolean
     onPause: () => void
 }
 
-export default function Clock({ time, pause, onPause }: ClockProps) {
+export default function Clock({ time, maxTenths, pause, onPause }: ClockProps) {
     const [started, setStarted] = useState(false)
 
     function handleClick() {
@@ -18,6 +20,7 @@ export default function Clock({ time, pause, onPause }: ClockProps) {
     const seconds = Math.floor(time / 10)
     const tenths = time % 10
     const display = `${seconds}.${tenths}`
+    const progress = maxTenths > 0 ? time / maxTenths : 0
 
     return (
         <div className="section">
@@ -25,6 +28,8 @@ export default function Clock({ time, pause, onPause }: ClockProps) {
             <button className="timer" onClick={handleClick}>
                 <p className="count">{!started ? 'Start' : pause ? '❚❚' : display}</p>
             </button>
+            <br />
+            <ProgressBar progress={progress} />
         </div>
     )
 }

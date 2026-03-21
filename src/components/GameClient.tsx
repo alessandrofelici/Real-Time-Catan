@@ -20,6 +20,7 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
     const [pause, setPause] = useState(true)
     const [robber, setRobber] = useState(0)
     const [value, setValue] = useState(0)
+    const [dice, setDice] = useState<[number, number]>([0, 0])
     const [round, setRound] = useState(0)
     const [allRolls, setAllRolls] = useState<number[]>([])
     const [allRobbers, setAllRobbers] = useState<number[]>([])
@@ -51,11 +52,11 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
     }
 
     const handleRoll = useCallback(() => {
-        const dice =
-            Math.floor(Math.random() * 6) + 1 +
-            Math.floor(Math.random() * 6) + 1
-        setValue(dice)
-        setAllRolls((prev) => [...prev, dice])
+        const die1 = Math.floor(Math.random() * 6) + 1
+        const die2 = Math.floor(Math.random() * 6) + 1
+        setDice([die1, die2])
+        setValue(die1 + die2)
+        setAllRolls((prev) => [...prev, die1 + die2])
         setRound((prev) => prev + 1)
         if (options.sound && audioRef.current) {
             audioRef.current.currentTime = 0
@@ -102,8 +103,8 @@ export default function GameClient({ maxTime, players, options }: GameClientProp
                 />
             )}
             <div className="mainPage">
-                <RollStats value={value} allRolls={allRolls} />
-                <Clock time={time} pause={pause} onPause={handlePause} />
+                <RollStats value={value} dice={dice} allRolls={allRolls} />
+                <Clock time={time} maxTenths={currentMaxTime * 10} pause={pause} onPause={handlePause} />
                 <Robber robber={robber} allRobbers={allRobbers} />
             </div>
         </div>

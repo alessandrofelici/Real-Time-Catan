@@ -39,6 +39,19 @@ export default function Options() {
     return (
         <div className="inputPage">
             <div className="formBox">
+                <h1
+                    style={{
+                        fontFamily: 'var(--font-headline), sans-serif',
+                        fontSize: 32,
+                        fontWeight: 900,
+                        textTransform: 'uppercase',
+                        letterSpacing: '-0.03em',
+                        color: '#ac2c00',
+                        marginBottom: 24,
+                    }}
+                >
+                    Real Time Catan
+                </h1>
                 <p>Roll Timer</p>
                 <input
                     className="textArea"

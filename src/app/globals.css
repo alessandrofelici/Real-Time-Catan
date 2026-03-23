@@ -43,8 +43,9 @@ body {
 
 .formBox {
     width: 600px;
-    background-color: #f8f8f8;
+    background-color: #efefef;
     border-radius: 20px;
+    border: 1px solid #d5d5d5;
     color: #2c2f30;
     font-family: var(--font-body), 'Manrope', sans-serif;
     font-weight: 600;
@@ -52,7 +53,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 50px 40px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: none;
 }
 
 .formBox p {

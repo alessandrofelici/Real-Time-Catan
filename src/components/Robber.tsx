@@ -1,5 +1,5 @@
 import StatDisplay from '@/components/StatDisplay'
-import { count, recent } from '@/lib/stats'
+import { count } from '@/lib/stats'
 
 type RobberProps = {
     robber: number
@@ -7,6 +7,8 @@ type RobberProps = {
 }
 
 export default function Robber({ robber, allRobbers }: RobberProps) {
+    const previousRobber = allRobbers.length >= 2 ? allRobbers[allRobbers.length - 2] : null
+
     return (
         <div className="space-y-6">
             <div className="flex items-center gap-3">
@@ -24,8 +26,14 @@ export default function Robber({ robber, allRobbers }: RobberProps) {
                 </div>
                 <StatDisplay
                     data={allRobbers}
-                    statKeys={[count('Times Rolled'), 'mostOccurring', 'mostOccurringCount', recent(1, 'Last Robber', (v) => `Player ${v}`)]}
+                    statKeys={[count('Times Rolled'), 'mostOccurring', 'mostOccurringCount']}
                 />
+                {previousRobber !== null && (
+                    <div className="flex justify-between items-center text-lg font-bold pt-2">
+                        <span className="text-on-surface-variant uppercase tracking-tight">Last Robber</span>
+                        <span className="text-on-surface">Player {previousRobber}</span>
+                    </div>
+                )}
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { defaultGameOptions } from '@/lib/gameOptions'
 import OptionSwitch from '@/components/OptionSwitch'
+import AboutModal from '@/components/AboutModal'
 
 export default function Options() {
     const router = useRouter()
@@ -11,6 +12,7 @@ export default function Options() {
     const [sound, setSound] = useState(defaultGameOptions.sound)
     const [speedupStart, setSpeedupStart] = useState(defaultGameOptions.speedupStart)
     const [robberAnimation, setRobberAnimation] = useState(defaultGameOptions.robberAnimation)
+    const [showAbout, setShowAbout] = useState(false)
 
     function handleStart() {
         const timerNum = parseInt(timer)
@@ -38,20 +40,46 @@ export default function Options() {
 
     return (
         <div className="inputPage">
+            {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
             <div className="formBox">
-                <h1
-                    style={{
-                        fontFamily: 'var(--font-headline), sans-serif',
-                        fontSize: 32,
-                        fontWeight: 900,
-                        textTransform: 'uppercase',
-                        letterSpacing: '-0.03em',
-                        color: '#ac2c00',
-                        marginBottom: 24,
-                    }}
-                >
-                    Real Time Catan
-                </h1>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
+                    <h1
+                        style={{
+                            fontFamily: 'var(--font-headline), sans-serif',
+                            fontSize: 32,
+                            fontWeight: 900,
+                            textTransform: 'uppercase',
+                            letterSpacing: '-0.03em',
+                            color: '#ac2c00',
+                            margin: 0,
+                        }}
+                    >
+                        Real Time Catan
+                    </h1>
+                    <button
+                        onClick={() => setShowAbout(true)}
+                        title="How to play"
+                        style={{
+                            width: 28,
+                            height: 28,
+                            borderRadius: '50%',
+                            border: '2px solid #ac2c00',
+                            background: 'transparent',
+                            color: '#ac2c00',
+                            fontFamily: 'var(--font-headline), sans-serif',
+                            fontWeight: 900,
+                            fontSize: 14,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                            marginTop: 4,
+                        }}
+                    >
+                        ?
+                    </button>
+                </div>
                 <p>Roll Timer</p>
                 <input
                     className="textArea"
